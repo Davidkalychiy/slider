@@ -1,6 +1,6 @@
 .slider{
     width: 300px;
-    height: 10px;
+    height: 6px;
     background-color: aqua;
     position: relative;
     display: flex;
@@ -9,8 +9,9 @@
     z-index: 5;
 }
 .box{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
+
     border-radius: 100%;
     background-color: red;
     position: absolute;

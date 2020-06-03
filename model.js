@@ -10,42 +10,54 @@ function mouseDown() {
 	document.addEventListener('mouseup', mouseUp);
 }
 function mouseMove(event) {
-	if (event.clientX - box.getBoundingClientRect().left - box.offsetWidth/2 > slide.step - 10) {
-		slide.value += slide.step;
-		if (slide.value > slide.max) {
-			slide.value = slide.max;
-		}
-		box.style.left = slider.offsetWidth/slide.step + 'px';
-		range.textContent = slide.value;
 
-	}else if (event.clientX - box.getBoundingClientRect().left < -slide.step + 10) {
-		slide.value -= slide.step;
-		if (slide.value < slide.min) {
-			slide.value = 0;
+	date.forEach(element => {
+		if (event.clientX > element[0] - step_real && event.clientX < element[0] + step_real) {
+			if (event.clientX <= slider.getBoundingClientRect().left) {
+				box.style.left = 0 + 'px';
+				range.textContent = slide.min;
+				slide.value = slider.min;
+			}else {
+				box.style.left = element[0] - slider.getBoundingClientRect().left + 'px' ;
+				slide.value = element[1];
+				range.textContent = slide.value ;
+			}
 		}
-		box.style.left = slider.offsetWidth/slide.step + 'px';
-		range.textContent = slide.value;
-	}
+	});
+
 
 	
 	
 }
-function mouseUp() {
+function mouseUp(event) {
 	document.removeEventListener('mousemove', mouseMove);
 }
 
 
 
 
+range.ondragstart = function() {
+	return false;
+};
 box.ondragstart = function() {
+	return false;
+};
+slider.ondragstart = function() {
+	return false;
+};
+document.ondragstart = function() {
 	return false;
 };
 
 
-
 let slide = {
-	max: 100,
-	min: 0,
-	value: 0,
-	step: 10
+	max: 1000,
+	min: 50,
+	value: 150,
+	step: 50
+};
+const step_real = (slider.offsetWidth-box.offsetWidth)/((slide.max-slide.min)/slide.step);
+let date = [];
+for (let k = slider.getBoundingClientRect().left, i = slide.min; i <= slide.max; i += slide.step, k+=step_real) {
+	date.push([k,i]);
 }
