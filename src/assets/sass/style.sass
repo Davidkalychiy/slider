@@ -1,0 +1,42 @@
+.slider_horizontal, .slider_vertical
+    margin-top: 100px
+    width: 300px
+    height: 6px
+    background-color: rgb(189, 189, 189)
+    position: relative
+    display: flex
+    align-items: center
+    margin-left: 100px
+    z-index: 5
+    border-radius: 30px
+    .round
+        width: 15px
+        height: 15px
+        border-radius: 100%
+        background-color: rgb(255, 0, 0)
+        position: absolute
+        z-index: 100
+    .value
+        position: absolute
+        transform: translateX(-25%)
+        bottom: 15px
+        width: 30px
+        height: 30px
+        background-color:  rgb(216, 14, 14)
+        display: flex
+        justify-content: center
+        align-items: center
+        color: #ffffff
+        border-radius: 10px
+        font-size: 14px
+
+.slider_vertical
+    justify-content: center
+    width: 6px
+    height: 300px
+    .round
+        top: 0
+    .value
+        top: 0
+        left: 20px
+        transform: translateY(-25%)
