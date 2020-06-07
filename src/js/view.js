@@ -1,120 +1,320 @@
+
+
+
+
 let wrapper = document.querySelector('.wrapper');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//view
+
+
 class scale {
-    constructor(name_slider, scale) {
+    constructor(name_slider) {
         this.name_slider = name_slider;
-        this.scale = document.querySelector(scale);
+        this.element = document.createElement('div');
     }
     render() {
-        let div = document.createElement('div');
-        div.innerHTML =`
+        this.element.innerHTML =`
         <div class='${this.name_slider}'>
         </div>`;
-        wrapper.append(div);
+        wrapper.append(this.element);
     }
     
 }
 
 
+
+
+
+
+
 // new scale('slider_horizontal', '.slider_horizontal').render();
 // let scale_horizontal = new scale('slider_horizontal', '.slider_horizontal').scale;
-new scale('slider_vertical', '.slider_vertical').render();
-let scale_vecrtical = new scale('slider_vertical', '.slider_vertical').scale;
+
+
+
+
+let slider_vertical_1 = new scale('slider_vertical');
+    // slider_vertical_2 = new scale('slider_vertical');
+slider_vertical_1.render();
+// slider_vertical_2.render();
+
+
+
+let slider_horizontal_1 = new scale('slider_horizontal');
+    // slider_horizontal_2 = new scale('slider_horizontal');
+slider_horizontal_1.render();
+// slider_horizontal_2.render();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class round {
-    constructor(parentSelector,round) {
-        this.parent = document.querySelector(parentSelector);
-        this.round = document.querySelector(round);
+    constructor(parent) {
+        this.parent = parent;
+        this.element = document.createElement('div');
     }
-    render() {
-        let round = document.createElement('div')
-        round.classList.add('round');
-        this.parent.append(round);
+    render(round_class) {
+        this.element.classList.add(round_class);
+        this.parent.append(this.element);
     }
 }
 
-// new round('.slider_horizontal', '.round').render();
-// let round_horizontal = new round('.slider_horizontal', '.round').round;
-new round('.slider_vertical', '.round').render();
-let round_vertical = new round('.slider_vertical', '.round').round;
+
+
+
+
+
+
+let round_1 = new round(slider_vertical_1.element.querySelector('.' + slider_vertical_1.name_slider));
+let round_2 = new round(slider_horizontal_1.element.querySelector('.' + slider_horizontal_1.name_slider));
+round_1.render('slider_vertical__round')
+round_2.render('slider_horizontal__round')
+
+
+
+// let round_3 = new round(slider_horizontal_1.element.querySelector('.' + slider_horizontal_1.name_slider));
+// let round_4 = new round(slider_horizontal_2.element.querySelector('.' + slider_horizontal_2.name_slider));
+// round_3.render()
+// round_4.render()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class value {
-    constructor(parentSelector,value) {
-        this.parent = document.querySelector(parentSelector);
-        this.value = document.querySelector(value);
+    constructor(parent) {
+        this.parent = parent;
+        this.element = document.createElement('div');
     }
-    render() {
-        let value = document.createElement('div');
-        value.classList.add('value');
-        this.parent.append(value);
+    render(value_class) {
+        this.element.classList.add(value_class);
+        this.parent.append(this.element);
     }
 }
 
 
 // new value('.slider_horizontal', '.value').render();
-// let value_horizontal = new value('.slider_horizontal', '.value').value;
+// let value_horizontal = new value('.slider_horizontal', '.slider_horizontal__value').value;
 
-new value('.slider_vertical', '.value').render();
-let value_vertical = new value('.slider_vertical', '.value').value;
+let value_1 = new value(slider_vertical_1.element.querySelector('.' + slider_vertical_1.name_slider));
+let value_2 = new value(slider_horizontal_1.element.querySelector('.' + slider_horizontal_1.name_slider));
+value_1.render('slider_vertical__value');
+value_2.render('slider_horizontal__value');
+// let value_vertical_1 = new value('.slider_vertical', '.slider_vertical__value').value;
+// let value_vertical_2 = new value('.slider_vertical', '.slider_vertical__value').value;
+
+
+
+
+
+
+
 class move {
-    constructor(round,scale,value,slider) {
+    constructor(round,scale,value,type_slider) {
         this.round = round;
         this.value = value;
         this.scale = scale;
-        this.slider = slider;
-
+        this.type_slider = type_slider;
     }
-    render() {
+    render(max,min,value_num,step) {
+
         this.slider = {
-            max: 10000,
-            min: 124,
-            value: 150,
-            step: 247
+            max: +`${max}`,
+            min: +`${min}`,
+            value_num: +`${value_num}`,
+            step: +`${step}`
         };
-        
-        
-        
-        const step_real = (this.scale.offsetHeight-this.round.offsetHeight)/((this.slider.max-this.slider.min)/this.slider.step);
-        let date = [];
-        for (let k = this.scale.getBoundingClientRect().top, i = this.slider.min; i <= this.slider.max; i += this.slider.step, k+=step_real) {
-            date.push([k,i]);
-        }
-        this.value.textContent = this.slider.min;
-        
-        this.round.addEventListener('mousedown', mouseDown);
-        function mouseDown() {
-            document.addEventListener('mousemove', mouseMove);
-            document.addEventListener('mouseup', mouseUp);
-        }
-        
+
+        // this.slider = {
+        //     max: 1000,
+        //     min: 10,
+        //     value_num: 10,
+        //     step: 10
+        // };
         let scale = this.scale,
             round = this.round,
             value = this.value,
-            slider = this.slider;
+            slider = this.slider,
+            type_slider = this.type_slider;
+
         
-        function mouseMove(event) {
-            date.forEach(element => {
-                if (event.clientY > element[0] - step_real && event.clientY < element[0] + step_real) {
-                
-                    if(event.clientY <= scale.getBoundingClientRect().top) {
-                        round.style.top = 0 + 'px';
-                        value.style.top = 0 + 'px';
-                        value.textContent = slider.min;
-                        slider.value = slider.min;
-                    }else {
-                        round.style.top = element[0] - scale.getBoundingClientRect().top + 'px' ;
-                        value.style.top = element[0] - scale.getBoundingClientRect().top + 'px' ;
-                        scale.value = element[1];
-                        value.textContent = scale.value ;
-                    }
+        if (type_slider == 'slider_vertical') {
+
+
+
+            value.textContent = slider.value_num;
+            round.addEventListener('mousedown', mouseDown);
+
+
+
+
+            function mouseMove(event) {
+                console.log(slider.max)
+                const step_real = (scale.offsetHeight-round.offsetHeight)/((slider.max-slider.min)/slider.step); 
+                let date = [];
+                for (let k = scale.getBoundingClientRect().top, i = slider.min; i <= slider.max; i += slider.step, k+=step_real) {
+                    date.push([k,i]);
                 }
-            });
-        
+                date.forEach(element => {
+                    if (event.clientY > element[0] - step_real && event.clientY < element[0] + step_real) {
+                    
+                        if(event.clientY <= scale.getBoundingClientRect().top) {
+                            round.style.top = 0 + 'px';
+                            value.style.top = 0 + 'px';
+                            slider.value_num = slider.min;
+                            value.textContent = slider.value_num;
+                        }else {
+                            round.style.top = element[0] - scale.getBoundingClientRect().top + 'px' ;
+                            value.style.top = element[0] - scale.getBoundingClientRect().top + 'px' ;
+                            slider.value_num = element[0];
+                            value.textContent = element[1] ;
+                        }
+                    }
+                });
+            }
+
+
+
+
+
+            function mouseDown() {
+                document.addEventListener('mousemove', mouseMove);
+                document.addEventListener('mouseup', mouseUp);
+            }
+            
+
+
+
+            
+            function mouseUp() {
+                document.removeEventListener('mousemove', mouseMove);
+            }
+        }else {
+
+            value.textContent = slider.value_num;
+            round.addEventListener('mousedown', mouseDown);
+
+
+
+
+            function mouseMove(event) {
+                const step_real = (scale.offsetWidth-round.offsetWidth)/((slider.max-slider.min)/slider.step); 
+                let date = [];
+                for (let k = scale.getBoundingClientRect().left, i = slider.min; i <= slider.max; i += slider.step, k+=step_real) {
+                    date.push([k,i]);
+                }
+                date.forEach(element => {
+                    if (event.clientX > element[0] - step_real && event.clientX < element[0] + step_real) {
+                    
+                        if(event.clientX <= scale.getBoundingClientRect().left) {
+                            round.style.left = 0 + 'px';
+                            value.style.left = 0 + 'px';
+                            slider.value_num = slider.min;
+                            value.textContent = slider.value_num;
+                        }else {
+                            round.style.left = element[0] - scale.getBoundingClientRect().left + 'px' ;
+                            value.style.left = element[0] - scale.getBoundingClientRect().left + 'px' ;
+                            slider.value_num = element[0];
+                            value.textContent = element[1] ;
+                        }
+                    }
+                });
+            }
+
+
+
+
+
+            function mouseDown() {
+                document.addEventListener('mousemove', mouseMove);
+                document.addEventListener('mouseup', mouseUp);
+            }
+            
+
+
+
+            
+            function mouseUp() {
+                document.removeEventListener('mousemove', mouseMove);  
+        }
+    }
+
+ 
+
+
         
             
             
-        }
-        function mouseUp(event) {
-            document.removeEventListener('mousemove', mouseMove);
-        }
+        
         
 
         this.value.ondragstart = function() {
@@ -133,5 +333,43 @@ class move {
 }
 
 
-// new move(round_horizontal, scale_horizontal, value_horizontal).render();
-new move(round_vertical, scale_vecrtical, value_vertical).render();
+
+
+
+
+
+
+new move(round_1.element, slider_vertical_1.element.querySelector('.' + slider_vertical_1.name_slider), value_1.element, 'slider_vertical').render(1000,100,100,100)
+new move(round_2.element, slider_horizontal_1.element.querySelector('.' + slider_horizontal_1.name_slider), value_2.element, 'slider_horizontal').render(1000,10,10,10)
+
+
+
+
+
+
+
+
+
+
+// model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//controller
+
+
+
