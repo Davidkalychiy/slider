@@ -6,5 +6,36 @@ html(lang="en")
         title Document
     body
         .wrapper
-        input(type="text" id="changeVerScale")
-        input(type="text" id="changeHorScale")
+        mixin inputs(change,type_ver,type_hor,max,min,step,showScale,hideScale,showValue,hideValue)
+            label() Значение 1 слайдера <br>
+                input(type="text" id= change)
+                <br>
+                input(type="radio" name="type" id= type_ver)
+                | Вертикальное положение
+                input(type="radio" name="type" id= type_hor)
+                | Горизонтальное положение <br>
+                label max значение <br>
+                    input(type="text" id= max)
+                    <br>
+                label min значение <br>
+                    input(type="text" id= min)
+                    <br>
+                label шаг слайдера <br>
+                    input(type="text" id= step)
+                    <br>
+                input(type="radio" name="scale" id= showScale)
+                | Показать шкалу
+                input(type="radio" name="scale" id= hideScale)
+                | Скрыть шкалу <br>
+                input(type="radio" name="value" id= showValue)
+                | Показать бегунок
+                input(type="radio" name="value" id= hideValue)
+                | Скрыть бегунок  <br>
+        +inputs('changeHorScale_1','ver_1','hor_1','max_1','min_1','step_1','showScale_1','hideScale_1','showValue_1','hideValue_1')
+        +inputs('changeHorScale_2','ver_2','hor_2','max_2','min_2','step_2','showScale_2','hideScale_2','showValue_2','hideValue_2')
+        +inputs('changeHorScale_3','ver_3','hor_3','max_3','min_3','step_3','showScale_3','hideScale_3','showValue_3','hideValue_3')
+                
+        label Значение 2 слайдера <br>
+            input(type="text" id="changeHorScale_2")
+        label Значение 3 слайдера <br>
+            input(type="text" id="changeHorScale_3")
