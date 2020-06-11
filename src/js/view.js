@@ -45,13 +45,17 @@ let wrapper = document.querySelector('.wrapper'),
 
 
 
+//model
+function dateSlider(max,min,step,value) {
+    return slider = {
+        max: max,
+        min: min,
+        step: step,
+        value: value
+    }
+}
 
-
-
-
-
-
-
+let dateSLiderHor_1 = dateSlider(200,0,20,0);
 
 
 
@@ -102,7 +106,7 @@ let wrapper = document.querySelector('.wrapper'),
 
 
 
-class scale {
+class slider {
     constructor(name_slider) {
         this.name_slider = name_slider;
         this.element = document.createElement('div');
@@ -121,30 +125,53 @@ class scale {
 
 
 
-let slider_vertical_1 = new scale('slider_vertical');
 
 
 
 
-let slider_horizontal_1 = new scale('slider_horizontal');
+
+let slider_horizontal_1 = new slider('slider_horizontal');
 slider_horizontal_1.render();
 
 
-let slider_horizontal_2 = new scale('slider_horizontal');
-slider_horizontal_2.render();
+// let slider_vertical_1 = new scale('slider_vertical');
+// slider_vertical_1.render();
+// slider_vertical_1.element.style.display = 'none'
 
-
-let slider_horizontal_3 = new scale('slider_horizontal');
-slider_horizontal_3.render();
-
-
-
+// let slider_horizontal_2 = new scale('slider_horizontal');
+// slider_horizontal_2.render();
 
 
 
+// let slider_vertical_2 = new scale('slider_vertical');
+// slider_vertical_2.render();
+
+// slider_vertical_2.element.style.display = 'none'
+
+// let slider_horizontal_3 = new scale('slider_horizontal');
+// slider_horizontal_3.render();
 
 
-class underLine {
+
+// let slider_vertical_3 = new scale('slider_vertical');
+// slider_vertical_3.render();
+
+
+// slider_vertical_3.element.style.display = 'none'
+
+
+
+
+
+
+
+
+
+
+
+
+
+class scale {
     constructor(parent) {
         this.parent = parent;
         this.element = document.createElement('div');
@@ -160,18 +187,27 @@ class underLine {
 
 
 
-let underLine_1 = new underLine(slider_horizontal_1.element);
-underLine_1.render('slider_horizontal__underLine');
+let scaleHor_1 = new scale(slider_horizontal_1.element);
+scaleHor_1.render('slider_horizontal__underLine');
 
-let underLine_2 = new underLine(slider_horizontal_2.element);
-underLine_2.render('slider_horizontal__underLine');
-
-
-let underLine_3 = new underLine(slider_horizontal_3.element);
-underLine_3.render('slider_horizontal__underLine');
+// let underLineHor_2 = new underLine(slider_horizontal_2.element);
+// underLineHor_2.render('slider_horizontal__underLine');
 
 
+// let underLineHor_3 = new underLine(slider_horizontal_3.element);
+// underLineHor_3.render('slider_horizontal__underLine');
 
+
+
+// let underLineVer_1 = new underLine(slider_vertical_1.element);
+// underLineVer_1.render('slider_vertical__underLine');
+// underLineVer_1.element.style.display = 'none'
+// let underLineVer_2 = new underLine(slider_vertical_2.element);
+// underLineVer_2.render('slider_vertical__underLine');
+// underLineVer_2.element.style.display = 'none'
+// let underLineVer_3 = new underLine(slider_vertical_3.element);
+// underLineVer_3.render('slider_vertical__underLine');
+// underLineVer_3.element.style.display = 'none'
 
 
 
@@ -202,13 +238,23 @@ class round {
 
 
 
-let round_1 = new round(slider_horizontal_1.element);
-let round_2 = new round(slider_horizontal_2.element);
-let round_3 = new round(slider_horizontal_3.element);
-round_1.render('slider_horizontal__round');
-round_2.render('slider_horizontal__round');
-round_3.render('slider_horizontal__round');
+let roundHor_1 = new round(slider_horizontal_1.element);
+roundHor_1.render('slider_horizontal__round');
+// let roundHor_2 = new round(slider_horizontal_2.element);
+// let roundHor_3 = new round(slider_horizontal_3.element);
+// roundHor_1.render('slider_horizontal__round');
+// roundHor_2.render('slider_horizontal__round');
+// roundHor_3.render('slider_horizontal__round');
 
+// let roundVer_1 = new round(slider_vertical_1.element);
+// let roundVer_2 = new round(slider_vertical_2.element);
+// let roundVer_3 = new round(slider_vertical_3.element);
+// roundVer_1.render('slider_vertical__round');
+// roundVer_1.element.style.display = 'none'
+// roundVer_2.render('slider_vertical__round');
+// roundVer_2.element.style.display = 'none'
+// roundVer_3.render('slider_vertical__round');
+// roundVer_3.element.style.display = 'none'
 
 
 
@@ -243,8 +289,21 @@ class value {
 
 
 
-let value_1 = new value(slider_vertical_1.element);
-let value_2 = new value(slider_horizontal_1.element);
+let valueHor_1 = new value(slider_horizontal_1.element);
+valueHor_1.render('slider_horizontal__value');
+// let valueHor_2 = new value(slider_horizontal_2.element);
+// valueHor_2.render('slider_horizontal__value');
+// let valueHor_3 = new value(slider_horizontal_3.element);
+// valueHor_3.render('slider_horizontal__value')
+// let valueVer_1 = new value(slider_vertical_1.element);
+// valueVer_1.render('slider_vertical__value');
+// valueVer_1.element.style.display = 'none'
+// let valueVer_2 = new value(slider_vertical_2.element);
+// valueVer_2.render('slider_vertical__value');
+// valueVer_2.element.style.display = 'none'
+// let valueVer_3 = new value(slider_vertical_3.element);
+// valueVer_3.render('slider_vertical__value');
+// valueVer_3.element.style.display = 'none'
 
 
 
@@ -254,298 +313,181 @@ let value_2 = new value(slider_horizontal_1.element);
 
 
 
-class move {
-    constructor(round,scale,value,type_slider, underLine, inputValue) {
-        this.round = round;
-        this.value = value;
-        this.scale = scale;
-        this.underLine = underLine;
-        this.type_slider = type_slider;
-        this.inputValue = inputValue;
+            
+
+function moveLogic(slider,round,value,dateSlider,inputValue,scale,typeSlider) {
+    if (typeSlider == 'sliderHor') {
+        var parSlider = slider.element.offsetWidth,
+            parRound = round.element.offsetWidth,
+            posSlider = slider.element.getBoundingClientRect().left,
+            posRound = 'round.element.style.left',
+            posValue = 'value.element.style.left';
+            console.log(posRound)
     }
-    render(max,min,value_num,step) {
-
-        this.slider = {
-            max: +`${max}`,
-            min: +`${min}`,
-            value_num: +`${value_num}`,
-            step: +`${step}`
-        };
-
-        let scale = this.scale,
-            round = this.round,
-            value = this.value,
-            slider = this.slider,
-            inputValue = this.inputValue,
-            underLine = this.underLine,
-            type_slider = this.type_slider;
-
-        
-
-            const step_real = (scale.offsetWidth-round.offsetWidth)/((slider.max-slider.min)/slider.step); 
-            let date = [];
-            for (let k = scale.getBoundingClientRect().left, i = slider.min; i <= slider.max; i += slider.step, k+=step_real) {
-                date.push([k,i]);
+    const stepReal = (parSlider-parRound)/((dateSlider.max-dateSlider.min)/dateSlider.step); 
+    let date = [];
+    for (let k = posSlider, i = dateSlider.min; i <= dateSlider.max; i += dateSlider.step, k+=stepReal) {
+        date.push([k,i]);
+    }
+    
+    
+    
+    inputValue.addEventListener('change', changeScaleValue);
+    
+    function changeScaleValue() {
+        date.forEach(i => {
+            if (i[1] == +inputValue.value) {
+                posRound = i[0] - posSlider + 'px';
+                posValue = i[0] - posSlider + 'px';
+                value.element.textContent = i[1];
             }
-
+        })
+    }
+    
+    
+    
+    
+    value.element.textContent = dateSlider.value;
+    
+    
+    
+    
+    
+    
+    round.element.addEventListener('mousedown', mouseDown);
+    
+    
+    slider.element.addEventListener('click', onClickScale);
+    
+    
+    
+    function onClickScale(event) {
+        if(event.pageX <= posSlider) {
+            posRound = 0 + 'px'
+            posValue = 0 + 'px'
+            dateSlider.value = slider.min;
+            value.element.textContent = dateSlider.value;
+            inputValue.value = dateSlider.value;
+        }else if (event.pageX >= posSlider + parSlider) {
+            posRound = date[date.length-1][0] - posSlider + 'px';
+            posValue = date[date.length-1][0] - posSlider + 'px';
+            slider.element.value = dateSlider.max;
+            value.element.textContent = dateSlider.value;
+            inputValue.value = dateSlider.value;
+        }else{
+            date.forEach(element => {
+                if (event.pageX > element[0] - stepReal/2 && event.pageX < element[0] + stepReal/2) {
+                    posRound = element[0] - posSlider + 'px' ;
+                    posValue = element[0] - posSlider + 'px' ;
+                    dateSlider.value = element[1];
+                    value.element.textContent = element[1];
+                    inputValue.value = dateSlider.value;
             
-
-
-
-
-
-
-        if (type_slider == 'slider_vertical') {
-
-
-            inputValue.addEventListener('change', changeScaleValue);
-            
-            function changeScaleValue() {
-                date.forEach(i => {
-                    if (i[1] == +inputValue.value) {
-                        round.style.top = i[0] - scale.getBoundingClientRect().top + 'px';
-                    }
-                })
-            }
-
-
-            value.textContent = slider.value_num;
-            round.addEventListener('mousedown', mouseDown);
-
-
-            const step_real = (scale.offsetHeight-round.offsetHeight)/((slider.max-slider.min)/slider.step); 
-            let date = [];
-            for (let k = scale.getBoundingClientRect().top, i = slider.min; i <= slider.max; i += slider.step, k+=step_real) {
-                date.push([k,i]);
-            }
-
-            date.forEach(element => {  
-                let div = document.createElement('div');
-                div.style.display = 'flex'
-                div.style.justifyContent = 'center'
-                div.style.alignItems = 'center'
-                div.style.position = 'absolute'
-                div.style.top = element[0] - scale.getBoundingClientRect().top + 'px'
-                div.append(element[1]);
-                div.style.width = '15px'
-                div.style.height = '15px'
-                underLine.append(div)
-                div.style.userSelect = 'none'
-            })
-
-            scale.addEventListener('click', onClickScale);
-
-
-            function mouseMove(event) {
-       
-                if(event.pageY <= scale.getBoundingClientRect().top) {
-                    round.style.top= 0 + 'px';
-                    // value.style.top = 0 + 'px';
-                    slider.value_num = slider.min;
-                    value.textContent = slider.value_num;
-                    input.value = slider.value_num;
-                }else if (event.pageY >= scale.getBoundingClientRect().top + scale.offsetHeight) {
-                    round.style.top = date[date.length-1][0] - scale.getBoundingClientRect().top + 'px';
-                    // value.style.top = date[date.length-1][0] - scale.getBoundingClientRect().top + 'px';
-                    slider.value_num = slider.max;
-                    value.textContent = slider.value_num;
-                    inputValue.value = slider.value_num;
                 }
-                date.forEach(element => {
-                    if (event.pageY > element[0] - step_real && event.pageY < element[0] + step_real) {
-                        round.style.top = element[0] - scale.getBoundingClientRect().top + 'px' ;
-                        slider.value_num = element[1];
-                        value.textContent = element[1];
-                        inputValue.value = slider.value_num;
-                    }
-                });
-            }
-
-
-            function onClickScale(event) {
-                if(event.pageY <= scale.getBoundingClientRect().top) {
-                    round.style.top = 0 + 'px';
-                    value.style.top = 0 + 'px';
-                    slider.value_num = slider.min;
-                    value.textContent = slider.value_num;
-                }else if (event.pageY >= scale.getBoundingClientRect().top + scale.offsetHeight) {
-                    round.style.top = date[date.length-1][0] - scale.getBoundingClientRect().top + 'px';
-                    value.style.top = date[date.length-1][0] - scale.getBoundingClientRect().top + 'px';
-                    slider.value_num = slider.max;
-                    value.textContent = slider.value_num;
-                }
-                date.forEach(element => {
-                    if (event.pageY > element[0] - step_real/2 && event.pageY < element[0] + step_real/2) {
-                        round.style.top = element[0] - scale.getBoundingClientRect().top + 'px' ;
-                        value.style.top = element[0] - scale.getBoundingClientRect().top + 'px' ;
-                        slider.value_num = element[1];
-                        value.textContent = element[1] ;
-
-                    }
-                });
-            }
-
-
-
-
-
-            function mouseDown() {
-                document.addEventListener('mousemove', mouseMove);
-                document.addEventListener('mouseup', mouseUp);
-            }
-            
-
-
-
-            
-            function mouseUp() {
-                document.removeEventListener('mousemove', mouseMove);
-            }
-
-
-
-
-        }else {
-
-
-            inputValue.addEventListener('change', changeScaleValue);
-            
-            function changeScaleValue() {
-                date.forEach(i => {
-                    if (i[1] == +inputValue.value) {
-                        round.style.left = i[0] - scale.getBoundingClientRect().left + 'px';
-                    }
-                })
-            }
-            value.textContent = slider.value_num;
-            round.addEventListener('mousedown', mouseDown);
-
-
-            scale.addEventListener('click', onClickScale);
-
-            const step_real = (scale.offsetWidth-round.offsetWidth)/((slider.max-slider.min)/slider.step); 
-            let date = [];
-            for (let k = scale.getBoundingClientRect().left, i = slider.min; i <= slider.max; i += slider.step, k+=step_real) {
-                date.push([k,i]);
-            }
-            date.forEach(element => {  
-                let div = document.createElement('div');
-                div.style.position = 'absolute'
-                div.style.left = element[0] - scale.getBoundingClientRect().left + 'px'
-                div.append(element[1]);
-                div.style.width = '15px'
-                div.style.textAlign = 'center'
-                underLine.append(div)
-                div.style.userSelect = 'none'
-            })
-
-            function mouseMove(event) {
-
-                if(event.pageX <= scale.getBoundingClientRect().left) {
-                    round.style.left = 0 + 'px';
-                    // value.style.left = 0 + 'px';
-                    slider.value_num = date[0][1];
-                    value.textContent = slider.value_num;
-                    inputValue.value = slider.value_num;
-                }else if (event.pageX >= scale.getBoundingClientRect().left + scale.offsetWidth) {
-                    round.style.left = date[date.length-1][0] - scale.getBoundingClientRect().left + 'px';
-                    // value.style.left = date[date.length-1][0] - scale.getBoundingClientRect().left + 'px';
-                    slider.value_num = date[date.length-1][1];
-                    value.textContent = slider.value_num;
-                    inputValue.value = slider.value_num;
-                }
-                date.forEach(element => {
-                    if (event.pageX > element[0] - step_real && event.pageX < element[0] + step_real) {
-                        round.style.left = element[0] - scale.getBoundingClientRect().left + 'px' ;
-                        // value.style.left = element[0] - scale.getBoundingClientRect().left + 'px' ;
-                        slider.value_num = element[1];
-                        value.textContent = element[1] ;
-                        
-                        inputValue.value = slider.value_num;
-
-                    }
-                });
-            }
-            
-
-
-            
-            function onClickScale(event) {
-                if(event.pageX <= scale.getBoundingClientRect().left) {
-                    round.style.left = 0 + 'px';
-                    // value.style.left = 0 + 'px';
-                    slider.value_num = slider.min;
-                    value.textContent = slider.value_num;
-                }else if (event.pageX >= scale.getBoundingClientRect().left + scale.offsetWidth) {
-                    round.style.left = date[date.length-1][0] - scale.getBoundingClientRect().left + 'px';
-                    // value.style.left = date[date.length-1][0] - scale.getBoundingClientRect().left + 'px';
-                    slider.value_num = slider.max;
-                    value.textContent = slider.value_num;
-                }
-                date.forEach(element => {
-                    if (event.pageX > element[0] - step_real/2 && event.pageX < element[0] + step_real/2) {
-                        round.style.left = element[0] - scale.getBoundingClientRect().left + 'px' ;
-                        // value.style.left = element[0] - scale.getBoundingClientRect().left + 'px' ;
-                        slider.value_num = element[0];
-                        value.textContent = element[1] ;
-
-                    }
-                });
-            }
-
-
-
-
-
-            function mouseDown() {
-                document.addEventListener('mousemove', mouseMove);
-                document.addEventListener('mouseup', mouseUp);
-            }
-            
-
-
-
-            
-            function mouseUp() {
-                document.removeEventListener('mousemove', mouseMove);  
+            });
         }
     }
+    
+    
+    
 
- 
+    date.forEach(element => {  
+        let div = document.createElement('div');
+        div.style.position = 'absolute'
+        div.style.left = element[0] - slider.element.getBoundingClientRect().left + 'px'
+        div.append(element[1]);
+        div.style.width = '15px'
+        div.style.textAlign = 'center'
+        scale.element.append(div)
+        div.style.userSelect = 'none'
+    })
 
-
-        
-            
-            
-        
-        
-
-        this.value.ondragstart = function() {
-            return false;
-        };
-        this.round.ondragstart = function() {
-            return false;
-        };
-        this.scale.ondragstart = function() {
-            return false;
-        };
-        document.ondragstart = function() {
-            return false;
-        };
+    function mouseDown() {
+        document.addEventListener('mousemove', mouseMove);
+        document.addEventListener('mouseup', mouseUp);
     }
+        
+    
+    
+    
+        
+    function mouseUp() {
+        document.removeEventListener('mousemove', mouseMove);  
+    }
+
+    
+    function mouseMove(event) {
+    
+        if(event.pageX <= posSlider) {
+            posRound = 0 + 'px';
+            posValue = 0 + 'px';
+            dateSlider.value = date[0][1];
+            value.element.textContent = dateSlider.value;
+            inputValue.value = dateSlider.value;
+        }else if (event.pageX >= posSlider + slider.element.offsetWidth) {
+            posRound = date[date.length-1][0] - posSlider + 'px';
+            posValue = date[date.length-1][0] - posSlider + 'px';
+            dateSlider.value = date[date.length-1][1];
+            value.element.textContent = dateSlider.value;
+            inputValue.value = dateSlider.value;
+        }
+        date.forEach(element => {
+            if (event.pageX > element[0] - stepReal && event.pageX < element[0] + stepReal) {
+                posRound = element[0] - posSlider + 'px' ;
+                posValue = element[0] - posSlider + 'px' ;
+                dateSlider.value = element[1];
+                value.element.textContent = element[1];
+                inputValue.value = dateSlider.value;
+    
+            }
+        });
+
+    }
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    // this.value.ondragstart = function() {
+    //     return false;
+    // };
+    // this.round.ondragstart = function() {
+    //     return false;
+    // };
+    // this.scale.ondragstart = function() {
+    //     return false;
+    // };
+    // document.ondragstart = function() {
+    //     return false;
+    // };
 }
-// round_1 = null
 
 
 
 
 
-new move(round_1.element, slider_horizontal_1.element,'', 'slider_horizontal', underLine_1.element, changeHorScale_1).render(100,0,0,11)
-new move(round_2.element, slider_horizontal_2.element,'', 'slider_horizontal', underLine_2.element, changeHorScale_2).render(100,0,0,7)
-new move(round_3.element, slider_horizontal_3.element,'', 'slider_horizontal', underLine_3.element, changeHorScale_3).render(100,0,0,10)
 
 
 
+moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
 
 
 
@@ -570,9 +512,6 @@ new move(round_3.element, slider_horizontal_3.element,'', 'slider_horizontal', u
 
 
 //controller
-
-
-
 
 
 
