@@ -59,8 +59,8 @@ function dateSlider(max,min,step,value) {
 }
 
 
-let dateSLiderHor_1 = dateSlider(100,0,1,0);
-let dateSLiderVer_1 = dateSlider(100,0,1,0);
+let dateSLiderHor_1 = dateSlider(200,0,20,0);
+let dateSLiderVer_1 = dateSlider(100,0,10,0);
 
 
 
@@ -300,38 +300,45 @@ scaleHor_1.render('slider_horizontal__underLine');
 let scaleVer_1 = new scale(slider_vertical_1.element);
 scaleVer_1.render('slider_vertical__underLine');
 
-function creaderDiv(typeSlider,slider,round,dateSlider,scale) {
-    if (typeSlider == 'sliderHor') {
-        var parSlider = slider.element.offsetWidth,
-            parRound = round.element.offsetWidth,
-            posSlider = slider.element.getBoundingClientRect().left;
-    }else if (typeSlider == 'sliderVer') {
-        var parSlider = slider.element.offsetHeight
-            parRound = round.element.offsetHeight,
-            posSlider = slider.element.getBoundingClientRect().top;
-    }
-    const stepReal = (parSlider-parRound)/((dateSlider.max-dateSlider.min)/dateSlider.step); 
-    let date = [];
-    for (let k = posSlider, i = dateSlider.min; i <= dateSlider.max; i += dateSlider.step, k+=stepReal) {
-        date.push([k,i]);
-    }
-    date.forEach(element => {  
-        let div = document.createElement('div');
-        div.setAttribute('id', typeSlider + element[1])
-        div.style.position = 'absolute'
-        if (typeSlider == 'sliderHor') {
-            div.style.left = element[0] - posSlider + 'px'
-        }else if (typeSlider == 'sliderVer') {
-            div.style.top = element[0] - posSlider + 'px'
-        }
+
+
+
+
+
+
+
+// function creaderDiv(typeSlider,slider,round,dateSlider,scale) {
+//     if (typeSlider == 'sliderHor') {
+//         var parSlider = slider.element.offsetWidth,
+//             parRound = round.element.offsetWidth,
+//             posSlider = slider.element.getBoundingClientRect().left;
+//     }else if (typeSlider == 'sliderVer') {
+//         var parSlider = slider.element.offsetHeight
+//             parRound = round.element.offsetHeight,
+//             posSlider = slider.element.getBoundingClientRect().top;
+//     }
+//     const stepReal = (parSlider-parRound)/((dateSlider.max-dateSlider.min)/dateSlider.step); 
+//     let date = [];
+//     for (let k = posSlider, i = dateSlider.min; i <= dateSlider.max; i += dateSlider.step, k+=stepReal) {
+//         date.push([k,i]);
+//     }
+//     date.forEach(element => {  
+//         let div = document.createElement('div');
+//         div.setAttribute('id', typeSlider + element[1])
+//         div.style.position = 'absolute'
+//         if (typeSlider == 'sliderHor') {
+//             div.style.left = element[0] - posSlider + 'px'
+//         }else if (typeSlider == 'sliderVer') {
+//             div.style.top = element[0] - posSlider + 'px'
+//         }
         
-        // div.append(element[1]);
-        div.style.width = '15px'
-        div.style.textAlign = 'center'
-        scale.element.append(div)
-        div.style.userSelect = 'none'
-    })
-}
+//         // div.append(element[1]);
+//         div.style.width = '15px'
+//         div.style.textAlign = 'center'
+//         scale.element.append(div)
+//         div.style.userSelect = 'none'
+//     })
+// }
 
 
 
@@ -344,6 +351,9 @@ function creaderDiv(typeSlider,slider,round,dateSlider,scale) {
 
 
 
+
+// creaderDiv('sliderHor',slider_horizontal_1,roundHor_1,dateSLiderHor_1,scaleHor_1)
+// creaderDiv('sliderVer',slider_vertical_1,roundVer_1,dateSLiderHor_1,scaleVer_1)
 
 
 
@@ -411,12 +421,14 @@ function moveLogic(slider,round,value,dateSlider,inputValue,scale,typeSlider) {
                 if (typeSlider == 'sliderHor') {
                     round.element.style.left = i[0] - posSlider + 'px';
                     value.element.style.left = i[0] - posSlider + 'px';
-                }else {
+                    value.element.textContent = i[1];
+                }else if (typeSlider == 'sliderVer') {
                     round.element.style.top = i[0] - posSlider + 'px';
                     value.element.style.top = i[0] - posSlider + 'px';
+                    value.element.textContent = i[1];
                 }
 
-                value.element.textContent = i[1];
+                
             }
         })
     }
@@ -443,7 +455,7 @@ function moveLogic(slider,round,value,dateSlider,inputValue,scale,typeSlider) {
             if (typeSlider == 'sliderHor') {
                 round.element.style.left = 0 + 'px';
                 value.element.style.left = 0 + 'px';
-            }else {
+            }else if (typeSlider == 'sliderVer') {
                 round.element.style.top = 0 + 'px';
                 value.element.style.top = 0 + 'px';
             }
@@ -454,7 +466,7 @@ function moveLogic(slider,round,value,dateSlider,inputValue,scale,typeSlider) {
             if (typeSlider == 'sliderHor') {
                 round.element.style.left = date[date.length-1][0] - posSlider + 'px';
                 value.element.style.left = date[date.length-1][0] - posSlider + 'px';
-            }else {
+            }else if (typeSlider == 'sliderVer') {
                 round.element.style.top = date[date.length-1][0] - posSlider + 'px';
                 value.element.style.top = date[date.length-1][0] - posSlider + 'px';
             }
@@ -539,7 +551,7 @@ function moveLogic(slider,round,value,dateSlider,inputValue,scale,typeSlider) {
                     dateSlider.value = element[1];
                     value.element.textContent = element[1];
                     inputValue.value = dateSlider.value;
-                }else {
+                }else if(typeSlider == 'sliderVer') {
                     round.element.style.top = element[0] - posSlider + 'px' ;
                     value.element.style.top = element[0] - posSlider + 'px' ;
                     dateSlider.value = element[1];
@@ -553,24 +565,58 @@ function moveLogic(slider,round,value,dateSlider,inputValue,scale,typeSlider) {
 
     }
 
+    // for (let i = 0; i <= 100;i++) {
+    //     let div = document.getElementById(typeSlider + i);
+    //     div.textContent = '';
+    // }
 
+    // const valueStep = Math.round(100/((dateSlider.max - dateSlider.min)/dateSlider.step));
 
-    const valueStep = Math.round(100/((dateSlider.max - dateSlider.min)/dateSlider.step));
-    for (let i = 0; i <= 100;i++) {
-        let div = document.getElementById(typeSlider + i);
-        div.textContent = '';
-    }
-    if (valueStep >=5) {
-        let fuck = [];
-        for (let k = 0, i = dateSlider.min; i <= dateSlider.max; i += dateSlider.step, k+=valueStep) {
-            fuck.push([k,i]);
-        }
-        fuck.forEach(element => {  
-            let div = document.getElementById(typeSlider + element[0])
-            div.textContent = element[1];
+    // if ((dateSlider.max - dateSlider.min)/dateSlider.step <= 20) {
+
+    //     let fuck = [];
+    //     for (let k = 0, i = dateSlider.min; i <= dateSlider.max; i += dateSlider.step, k+=valueStep) {
+    //         fuck.push([k,i]);
+    //     }
+    //     fuck.forEach(element => {  
+    //         let div = document.getElementById(typeSlider + element[0])
+    //         div.textContent = element[1];
+    //     })
+    // }
+    if (typeSlider == 'sliderHor') {
+        console.log('hor')
+        date.forEach(element => {  
+            let div = document.createElement('div');
+            div.setAttribute('id', 'sliderHor' + element[1]);
+            div.style.position = 'absolute'
+            div.style.left = element[0] - slider.element.getBoundingClientRect().left + 'px'
+            div.append(element[1]);
+            div.style.width = '15px'
+            div.style.textAlign = 'center'
+            scale.element.append(div)
+            div.style.userSelect = 'none'
         })
+    } else if (typeSlider == 'sliderVer') {
+        console.log('ver')
+        date.forEach(element => {  
+            let div = document.createElement('div');
+            div.setAttribute('id', 'sliderVer' + element[1]);
+            div.style.position = 'absolute'
+            div.style.top = element[0] - slider.element.getBoundingClientRect().top + 'px'
+            div.append(element[1]);
+            div.style.width = '15px'
+            div.style.textAlign = 'center'
+            scale.element.append(div)
+            div.style.userSelect = 'none'
+        }) 
     }
 
+
+    inputValue.value = dateSlider.value
+
+    max_1.value = dateSlider.max;
+    min_1.value = dateSlider.min;
+    step_1.value = dateSlider.step;
 
 
 
@@ -632,40 +678,40 @@ moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale
 
 //controller
 
+function removerDiv(slider,round,dateSLider,typeSlider) {
+    if (typeSlider == 'sliderHor') {
+        var parSlider = slider.element.offsetWidth,
+            parRound = round.element.offsetWidth,
+            posSlider = slider.element.getBoundingClientRect().left;
+    }else if (typeSlider == 'sliderVer') {
+        var parSlider = slider.element.offsetHeight,
+            parRound = round.element.offsetHeight,
+            posSlider = slider.element.getBoundingClientRect().top;
+    }
+    const stepReal = (parSlider-parRound)/((dateSLider.max-dateSLider.min)/dateSLider.step); 
+    let date = [];
+    for (let k = posSlider, i = dateSLider.min; i <= dateSLider.max; i += dateSLider.step, k+=stepReal) {
+        date.push([k,i]);
+    }
+    date.forEach(i => {
+        let div = document.getElementById(typeSlider + i[1]);
+        div.remove();
+    })
+}
 
 
 
 
 
 
+// let verScale = setInterval(() => {
+//     if (ver_1.checked == true) {
+//         moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
+//         clearInterval(verScale);
+        
+//     }    
+// }, 1);
 
-
-let horScale = setInterval(() => {
-    if (hor_1.checked == true) {
-        creaderDiv('sliderHor',slider_horizontal_1,roundHor_1,dateSLiderHor_1,scaleHor_1)
-        clearInterval(horScale);
-        let horScale = setInterval(() => {
-    if (hor_1.checked == true) {
-        creaderDiv('sliderHor',slider_horizontal_1,roundHor_1,dateSLiderHor_1,scaleHor_1)
-        clearInterval(horScale);
-    }    
-}, 500);
-
-let verScale = setInterval(() => {
-    if (ver_1.checked == true) {
-        creaderDiv('sliderVer',slider_vertical_1,roundVer_1,dateSLiderVer_1,scaleVer_1);
-        clearInterval(verScale);
-    }    
-}, 500);
-    }    
-}, 500);
-
-let verScale = setInterval(() => {
-    if (ver_1.checked == true) {
-        creaderDiv('sliderVer',slider_vertical_1,roundVer_1,dateSLiderVer_1,scaleVer_1);
-        clearInterval(verScale);
-    }    
-}, 500);
 
 
 
@@ -673,54 +719,70 @@ ver_1.addEventListener('change', ver);
 hor_1.addEventListener('change', hor);
 
 function hor() {
+    
     slider_horizontal_1.element.style.display = 'flex';
     slider_vertical_1.element.style.display = 'none';
+    removerDiv(slider_horizontal_1,roundHor_1,dateSLiderHor_1,'sliderHor');
     moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
+    max_1.addEventListener('change', () => {
+        removerDiv(slider_horizontal_1,roundHor_1,dateSLiderHor_1,'sliderHor');
+        dateSLiderHor_1.max = +max_1.value;
+        moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
+    })
+    
+    
+    min_1.addEventListener('change', () => {
+        removerDiv(slider_horizontal_1,roundHor_1,dateSLiderHor_1,'sliderHor');
+        dateSLiderHor_1.min = +min_1.value;
+        moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
+    })
+    
+    
+    step_1.addEventListener('change', () => {
+        removerDiv(slider_horizontal_1,roundHor_1,dateSLiderHor_1,'sliderHor');
+        dateSLiderHor_1.step = +step_1.value;
+        moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
+    })
+    
+    
+    value_1.addEventListener('change', () => {
+        removerDiv(slider_horizontal_1,roundHor_1,dateSLiderHor_1,'sliderHor');
+        dateSLiderHor_1.value = +value_1.value;
+        moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
+    })
     
 }
 function ver() {
     slider_horizontal_1.element.style.display = 'none';
     slider_vertical_1.element.style.display = 'flex';
+    removerDiv(slider_vertical_1,roundVer_1,dateSLiderVer_1,'sliderVer')
     moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
+    max_1.addEventListener('change', () => {
+        removerDiv(slider_vertical_1,roundVer_1,dateSLiderVer_1,'sliderVer')
+        dateSLiderVer_1.max = +max_1.value;
+        moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
+    })
+    
+    
+    min_1.addEventListener('change', () => {
+        removerDiv(slider_vertical_1,roundVer_1,dateSLiderVer_1,'sliderVer')
+        dateSLiderVer_1.min = +min_1.value;
+        moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
+    })
+    
+    
+    step_1.addEventListener('change', () => {
+        removerDiv(slider_vertical_1,roundVer_1,dateSLiderVer_1,'sliderVer')
+        dateSLiderVer_1.step = +step_1.value;
+        moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
+    })
+    
+    
+    value_1.addEventListener('change', () => {
+        removerDiv(slider_vertical_1,roundVer_1,dateSLiderVer_1,'sliderVer')
+        dateSLiderVer_1.value = +value_1.value;
+        moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
+    })
+    
     
 }
-
-
-
-
-max_1.addEventListener('change', () => {
-    dateSLiderHor_1.max = +max_1.value;
-    dateSLiderVer_1.max = +max_1.value;
-    moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
-    moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
-})
-
-
-min_1.addEventListener('change', () => {
-    dateSLiderHor_1.min = +min_1.value;
-    dateSLiderVer_1.min = +min_1.value;
-    moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
-    moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
-})
-
-
-step_1.addEventListener('change', () => {
-    dateSLiderHor_1.step = +step_1.value;
-    dateSLiderVer_1.step = +step_1.value;
-    moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
-    moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
-})
-
-
-value_1.addEventListener('change', () => {
-    dateSLiderHor_1.value = +value_1.value;
-    dateSLiderVer_1.value = +value_1.value;
-    moveLogic(slider_horizontal_1,roundHor_1,valueHor_1,dateSLiderHor_1,changeHorScale_1,scaleHor_1,'sliderHor')
-    moveLogic(slider_vertical_1,roundVer_1,valueVer_1,dateSLiderVer_1,changeHorScale_1,scaleVer_1,'sliderVer')
-})
-
-console.log(hor_1.checked)
-
-
-
-
